@@ -21,7 +21,7 @@ CREATE INDEX "Key1" ON  "Role_map" ("Role_NO");
 
 CREATE TABLE "All_User" (
   "ID" SERIAL PRIMARY KEY,
-  "Username" VARCHAR(20) unique,
+  "Username" VARCHAR(100) unique,
   "Role_NO" INT,
   FOREIGN KEY ("Role_NO")
       REFERENCES "Role_map"("Role_NO")
@@ -31,12 +31,12 @@ CREATE INDEX "Key2" ON  "All_User" ("ID");
 
 CREATE TABLE "Orphanage" (
   "Orphanage_ID" SERIAL PRIMARY KEY,
-  "orphanage_name" VARCHAR(20),
-  "address" VARCHAR(20),
-  "contact" INT,
-  "capacity" INT,
-  "employee_count" INT,
-  "Email" VARCHAR(20)
+  "Orphanage_Name " VARCHAR(100),
+  "Address" VARCHAR(100),
+  "Contact" VARCHAR(100),
+  "Capacity" INT,
+  "Employee_Count" INT,
+  "Email" VARCHAR(100)
 );
 
 CREATE INDEX "Key3" ON "Orphanage" ("Orphanage_ID");
@@ -52,12 +52,12 @@ CREATE INDEX "Key4" ON  "Admin" ("ID");
 
 CREATE TABLE "Super_Employee_Manager" (
   "ID" INT PRIMARY KEY,
-  "Employee_Name" VARCHAR(20),
+  "Employee_Name" VARCHAR(100),
   "password" VARCHAR(100),
   "Age" INT,
-  "Address" VARCHAR(50),
-  "contact" VARCHAR(15),
-  "Email" VARCHAR(30),
+  "Address" VARCHAR(100),
+  "contact" VARCHAR(100),
+  "Email" VARCHAR(100),
   FOREIGN KEY ("ID")
       REFERENCES "All_User"("ID")
 );
@@ -66,12 +66,12 @@ CREATE INDEX "Key5" ON  "Super_Employee_Manager" ("ID");
 
 CREATE TABLE "Employee_Orphan_Manager" (
   "ID" INT PRIMARY KEY,
-  "Employee Name" VARCHAR(20),
+  "Employee_Name" VARCHAR(100),
   "password" VARCHAR(100),
   "Age" INT,
-  "Address" VARCHAR(50),
-  "contact" VARCHAR(15),
-  "Email" VARCHAR(30),
+  "Address" VARCHAR(100),
+  "contact" VARCHAR(100),
+  "Email" VARCHAR(100),
   "Orphanage_ID" INT,
   FOREIGN KEY ("ID")
       REFERENCES "All_User"("ID"),
@@ -83,12 +83,12 @@ CREATE INDEX "Key6" ON  "Employee_Orphan_Manager" ("ID");
 
 CREATE TABLE "User" (
   "ID" INT PRIMARY KEY,
-  "Name" VARCHAR(20),
-  "password" VARCHAR(100),
+  "Name" VARCHAR(100),
+  "Password" VARCHAR(100),
   "Age" INT,
-  "Address" VARCHAR(50),
-  "contact" VARCHAR(15),
-  "Email" VARCHAR(30),
+  "Address" VARCHAR(100),
+  "Contact" VARCHAR(100),
+  "Email" VARCHAR(100),
   FOREIGN KEY ("ID")
       REFERENCES "All_User"("ID")
 );
@@ -98,9 +98,9 @@ CREATE INDEX "Key7" ON  "User" ("ID");
 CREATE TABLE "Child" (
   "Child_ID" SERIAL PRIMARY KEY,
   "Orphanage_ID" INT,
-  "Child_Name " VARCHAR(20),
+  "Child_Name " VARCHAR(100),
   "Age" INT,
-  "Gender" VARCHAR(6),
+  "Gender" VARCHAR(100),
   "Fostered" BOOLEAN,
   FOREIGN KEY ("Orphanage_ID")
       REFERENCES "Orphanage"("Orphanage_ID")
@@ -111,8 +111,8 @@ CREATE INDEX "Key8" ON  "Child" ("Child_ID");
 CREATE TABLE "Worker" (
   "Worker_ID" SERIAL PRIMARY KEY,
   "Age" INT,
-  "Address" VARCHAR(20),
-  "Email" VARCHAR(20),
+  "Address" VARCHAR(100),
+  "Email" VARCHAR(100),
   "Orphanage_ID" INT,
   FOREIGN KEY ("Orphanage_ID")
       REFERENCES "Orphanage"("Orphanage_ID")
@@ -122,9 +122,9 @@ CREATE INDEX "Key9" ON  "Worker" ("Worker_ID");
 
 CREATE TABLE "Document" (
   "Document_ID" SERIAL PRIMARY KEY,
-  "Document_name" VARCHAR(20),
+  "Document_name" VARCHAR(100),
   "Created_at" TIMESTAMP,
-  "Created_by" VARCHAR(20)
+  "Created_by" VARCHAR(100)
 );
 
 CREATE INDEX "Key10" ON  "Document" ("Document_ID");
@@ -146,8 +146,8 @@ CREATE TABLE "Inquiry" (
   "Inquiry_ID" SERIAL PRIMARY KEY,
   "ID" INT,
   "Child_ID" INT,
-  "Inquiry_Title" VARCHAR(30),
-  "Inquiry_Description" VARCHAR(30),
+  "Inquiry_Title" VARCHAR(100),
+  "Inquiry_Description" VARCHAR(100),
   "Proofs" BYTEA,
   FOREIGN KEY ("ID")
       REFERENCES "User"("ID"),
@@ -159,12 +159,12 @@ CREATE INDEX "Key12" ON  "Inquiry" ("Inquiry_ID");
 
 CREATE TABLE "Foster_Parent" (
   "Foster_Parent_ID" SERIAL PRIMARY KEY,
-  "Foster_Parnet_Name" VARCHAR(20),
+  "Foster_Parnet_Name" VARCHAR(100),
   "Age" INT,
-  "Gender" VARCHAR(6),
-  "Address" VARCHAR(50),
-  "Contact_Number" VARCHAR(15),
-  "Income_Level" INT
+  "Gender" VARCHAR(100),
+  "Address" VARCHAR(100),
+  "Contact_Number" VARCHAR(100),
+  "Income_Level" NUMERIC(10,4)
 );
 
 CREATE INDEX "Key13" ON  "Foster_Parent" ("Foster_Parent_ID");
@@ -185,8 +185,8 @@ CREATE INDEX "Key14" ON  "Adoption" ("Child_ID");
 CREATE TABLE "Case" (
   "Case_ID" SERIAL PRIMARY KEY,
   "Child_ID" INT,
-  "Case_Title" VARCHAR(30),
-  "Case_Description" VARCHAR(30),
+  "Case_Title" VARCHAR(100),
+  "Case_Description" VARCHAR(100),
   "Document_ID" INT,
   FOREIGN KEY ("Child_ID")
     REFERENCES "Child"("Child_ID"),
