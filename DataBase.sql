@@ -14,7 +14,7 @@
 
 CREATE TABLE "Role_map" (
   "Role_NO" INT PRIMARY KEY,
-  "Table" VARCHAR(10)
+  "Table" VARCHAR(30)
 );
 
 CREATE INDEX "Key1" ON  "Role_map" ("Role_NO");

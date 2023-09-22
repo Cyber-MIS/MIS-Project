@@ -1,6 +1,5 @@
 const { Pool } = require('pg');
-// const dotenv = require('dotenv');
-// dotenv.config();
+//var fs = require('fs'); //For SSL
 
 const dbSettings = {
     user: process.env.DB_USER,
@@ -8,19 +7,32 @@ const dbSettings = {
     host: process.env.DB_HOST,
     database: process.env.DB_DATABASE,
     // port: process.env.DB_PORT
+    /* ssl  : {
+        ca : fs.readFileSync('<path to CA cert file>')
+      } */
 };
 
 const pool = new Pool(dbSettings);
 
-async function executeSQL(sql, placeholders) {
-    try {
-        const client = await pool.connect();
-        const result = await client.query(sql, placeholders);
-        client.release();
-        return result.rows;
-    } catch (error) {
-        throw error;
-    }
+const executeSQL = async (sql, placeholders) => {
+        return new Promise((res,rej)=>{
+            pool.connect(function(err, connection) {
+                if (err) throw err; // not connected!
+               
+                // Use the connection
+                connection.query(sql,placeholders, async (error, results, fields)=> {
+        
+                    // When done with the connection, release it.
+                    connection.release();
+                
+                    // Handle error after the release.
+                    if (error){
+                        rej({error});
+                    }
+                    res(results);
+                });
+            });
+        });
 }
 
 module.exports = { executeSQL };
