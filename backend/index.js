@@ -1,11 +1,24 @@
-var express = require('express');
+const express = require('express');
+const http = require("http");
+const cors = require("cors");
 const dotenv = require('dotenv');
 dotenv.config();
 
+
+const dashboardControl = require("./routes/dashboard.route");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+
+app.use("/dashboard",dashboardControl);
+
+// app.listen(process.env.PORT);
+
+app.listen(4000);
+/* 
 const {executeSQL} = require('./configureDB/DB');
-
-// var apiController = require("./API/API");
-
 const out =async () => {
 
     try{
@@ -26,7 +39,7 @@ const out =async () => {
     }
 };
 
-out();
+out(); */
 
 /* DELETE FROM "Role_map" where "Role_NO" IN (1,2,3,4);
 --DELETE FROM "All_User" where "Role_NO" IN (1,2,3,4); */

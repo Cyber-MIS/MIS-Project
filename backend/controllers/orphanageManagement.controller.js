@@ -1,0 +1,1 @@
+const ophanageManagementModel = require("../models/orphanagemanagement.model")
