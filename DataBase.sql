@@ -31,7 +31,7 @@ CREATE INDEX "Key2" ON  "All_User" ("ID");
 
 CREATE TABLE "Orphanage" (
   "Orphanage_ID" SERIAL PRIMARY KEY,
-  "orphanage name " VARCHAR(20),
+  "orphanage_name" VARCHAR(20),
   "address" VARCHAR(20),
   "contact" INT,
   "capacity" INT,

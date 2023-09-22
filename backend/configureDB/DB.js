@@ -24,7 +24,7 @@ const executeSQL = async (sql, placeholders) => {
                     if (error){
                         rej({error});
                     }
-                    res(results);
+                    res(results.rows);
                 });
             });
         });

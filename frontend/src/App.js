@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+//import axios from "axios";
 
 function App() {
     const [data, setData] = useState([]);
@@ -11,7 +11,8 @@ function App() {
         .then((response) => response.json())
         .then((data) => {
           console.log(data)
-          setData(data);
+          if (data) 
+            {setData(data);}
           setLoading(false);
         })
         .catch((error) => {
