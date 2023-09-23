@@ -3,17 +3,19 @@ const casemanagement = new casemanagementmodel()
 
 class casemanagementcontrol {
 
-    async createInquiry(method,user,inqurydata){
+    async createInquiry(method,user=){
         try {
-            await casemanagement.createInquiry(inqurydata);
+            const {Inquiry_ID,ID,Child_ID,Inquiry_Title,Inquiry_Description,Proofs} = method.getbody();
+            await casemanagement.createInquiry(Inquiry_ID,ID,Child_ID,Inquiry_Title,Inquiry_Description,Proofs);
         } catch (error) {
             return error;
         }
     }
 
-    async assignInquiry(mehtod,user,userID,inquiryID){
+    async assignInquiry(mehtod,user){
         try {
-            await casemanagement.assignInquiry(userID,inquiryID);
+            const {Inquiry_ID,Id} =method.getbody();
+            await casemanagement.assignInquiry(Inquiry_ID,ID);
         } catch (error) {
             return error;
         }

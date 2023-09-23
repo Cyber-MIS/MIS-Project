@@ -2,9 +2,10 @@ const orphanageManagementModel = require("../models/orphanagemanagement.model")
 const orphanagemanagement= new orphanageManagementModel();
 
 class orphanagemanagementcontrol{
-    async addOrphanage(method,user,orphanagedata){
+    async addOrphanage(method,user){
         try {
-            await orphanagemanagement.addOrphanage(orphanagedata);
+            const {Orphanage_ID,orphage_name,address,contact,capacity,employee_count,Email} = method.getbody();
+            await orphanagemanagement.addOrphanage(Orphanage_ID,orphage_name,address,contact,capacity,employee_count,Email);
         } catch (error) {
             return error;
         }

@@ -6,6 +6,7 @@ dotenv.config();
 
 
 const dashboardControl = require("./routes/dashboard.route");
+const authControl = require("./routes/authentication.route");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/dashboard",dashboardControl);
+app.use("/auth",authControl);
 
 // app.listen(process.env.PORT);
 
