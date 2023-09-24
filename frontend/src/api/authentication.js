@@ -13,7 +13,7 @@ axios.interceptors.request.use((config) => {
 export async function login(credentails) {
     console.log(credentails);
     try {
-        const response = await axios.post(`${HOST}/authentication/login`, credentails);
+        const response = await axios.post(`${HOST}/login`, credentails);
         if (response.data.auth === 'success'){
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('role', response.data.role);
@@ -44,7 +44,7 @@ export async function logout() {
 
 export async function addUser(newUSer) {
     try {
-        const response = await axios.post(`${HOST}/authentication/register`, newUSer);
+        const response = await axios.post(`${HOST}/register`, newUSer);
         return response.data;
     }
     catch (err) {

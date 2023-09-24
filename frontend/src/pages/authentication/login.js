@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 
 import { login } from '../../api/authentication';
 
-export default function UserLoginReg() {
+export default function Login() {
   const loginSchema = Yup.object().shape({
     username: Yup.string().required(),
     password: Yup.string().required(),
