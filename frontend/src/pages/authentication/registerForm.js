@@ -26,83 +26,87 @@ export default function UserReg() {
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <h1 className="text-center mb-4">Guest User Registration</h1>
-          <Formik
-            initialValues={{
-              name: '',
-              password: '',
-              age: '',
-              field: '',
-            }}
-            validationSchema={userRegSchema}
-            onSubmit={handleSubmit}
-          >
-            {(props) => {
-              return (
-                <Form>
-                  <div className="mb-3">
-                    <Field
-                      type="text"
-                      name="name"
-                      placeholder="Name"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="name"
-                      component="div"
-                      className="text-danger"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <Field
-                      type="password"
-                      name="password"
-                      placeholder="Password"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="password"
-                      component="div"
-                      className="text-danger"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <Field
-                      type="text"
-                      name="age"
-                      placeholder="Age"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="age"
-                      component="div"
-                      className="text-danger"
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <Field
-                      type="text"
-                      name="field"
-                      placeholder="Field"
-                      className="form-control"
-                    />
-                    <ErrorMessage
-                      name="field"
-                      component="div"
-                      className="text-danger"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="btn btn-primary btn-block"
-                    disabled={props.isSubmitting}
-                  >
-                    Submit
-                  </button>
-                </Form>
-              );
-            }}
-          </Formik>
+          <div className="card">
+            <div className="card-header text-center">Guest User Registration</div>
+            <div className="card-body">
+              <Formik
+                initialValues={{
+                  name: '',
+                  password: '',
+                  age: '',
+                  field: '',
+                }}
+                validationSchema={userRegSchema}
+                onSubmit={handleSubmit}
+              >
+                {(props) => {
+                  return (
+                    <Form>
+                      <div className="mb-3">
+                        <Field
+                          type="text"
+                          name="name"
+                          placeholder="Name"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="name"
+                          component="div"
+                          className="text-danger"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <Field
+                          type="password"
+                          name="password"
+                          placeholder="Password"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="password"
+                          component="div"
+                          className="text-danger"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <Field
+                          type="text"
+                          name="age"
+                          placeholder="Age"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="age"
+                          component="div"
+                          className="text-danger"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <Field
+                          type="text"
+                          name="field"
+                          placeholder="Field"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="field"
+                          component="div"
+                          className="text-danger"
+                        />
+                      </div>
+                      <button
+                        type="submit"
+                        className="btn btn-primary btn-block"
+                        disabled={props.isSubmitting}
+                      >
+                        Submit
+                      </button>
+                    </Form>
+                  );
+                }}
+              </Formik>
+            </div>
+          </div>
         </div>
       </div>
     </div>
