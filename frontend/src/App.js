@@ -1,5 +1,7 @@
 import Login from './pages/authentication/login';
 import UserReg from './pages/authentication/registerForm';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
