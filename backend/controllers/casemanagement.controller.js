@@ -3,10 +3,10 @@ const casemanagement = new casemanagementmodel()
 
 class casemanagementcontrol {
 
-    async createInquiry(method,user=){
+    async createInquiry(method,user){
         try {
             const {Inquiry_ID,ID,Child_ID,Inquiry_Title,Inquiry_Description,Proofs} = method.getbody();
-            await casemanagement.createInquiry(Inquiry_ID,ID,Child_ID,Inquiry_Title,Inquiry_Description,Proofs);
+            await casemanagement.createInquiry(Inquiry_ID,ID,Child_ID,Inquiry_Title,Inquiry_Description,Proofs,user);
         } catch (error) {
             return error;
         }
@@ -15,7 +15,7 @@ class casemanagementcontrol {
     async assignInquiry(mehtod,user){
         try {
             const {Inquiry_ID,Id} =method.getbody();
-            await casemanagement.assignInquiry(Inquiry_ID,ID);
+            await casemanagement.assignInquiry(Inquiry_ID,ID,user);
         } catch (error) {
             return error;
         }

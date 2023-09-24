@@ -11,32 +11,36 @@ class orphanagemanagementcontrol{
         }
     }
 
-    async updateOrphanage(method,user,orphanagedata){
+    async updateOrphanage(method,user){
         try {
-            await orphanagemanagement.updateOrphanage(orphanagedata);
+            const {Orphanage_ID,orphage_name,address,contact,capacity,employee_count,Email} = method.getbody();
+            await orphanagemanagement.updateOrphanage(Orphanage_ID,orphage_name,address,contact,capacity,employee_count,Email);
         } catch (error) {
             return error;
         }
     }
     
-    async deleteOrphanage(method,user,orphanageID){
+    async deleteOrphanage(method,user){
         try {
-            await orphanagemanagement.deleteOrphanage(orphanageID);
+            const {Orphanage_ID}=method.getbody();
+            await orphanagemanagement.deleteOrphanage(Orphanage_ID);
         } catch (error) {
             return error;
         }
     }
 
-    async receivefunding(user,method,fund){
+    async receivefunding(mwthod,user){
         try {
-            await orphanagemanagement.receivefunding(fund);
+            const {Fund_ID,Orphan_ID,Document_ID,Amount}=method.getbody();
+            await orphanagemanagement.receivefunding(Fund_ID,Orphan_ID,Document_ID,Amount);
         } catch (error) {
             return error;
         }
     }
-    async allocatefunding(user,method,fund){
+    async allocatefunding(method,user){
         try {
-            await orphanagemanagement.allocatefunding(fund);
+            const {Fund_ID,Orphanage_ID,Amount}=method.getbody();
+            await orphanagemanagement.allocatefunding(Fund_ID,Orphanage_ID,Amount);
         } catch (error) {
             return error;
         }

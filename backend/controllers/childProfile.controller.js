@@ -16,7 +16,7 @@ class childProfileControl{
         try {
              
             const {child_ID} = method.getBody();
-            await childProfile.deleteChild(child_ID);
+            await childProfile.deleteChild(child_ID,user);
           } catch (err) {
             return err;
           }
@@ -26,7 +26,7 @@ class childProfileControl{
         try {
             
             const {child_ID,orphanage_ID,Child_Name,Age,Gender,Fostered} = method.getBody(); 
-            await childProfile.updateChild(child_ID,orphanage_ID,Child_Name,Age,Gender,Fostered);
+            await childProfile.updateChild(child_ID,orphanage_ID,Child_Name,Age,Gender,Fostered,user);
           } catch (err) {
             return err;
           }
