@@ -1,0 +1,22 @@
+.navbar {
+    height: 60px;
+    display: flex;
+    padding: 11px 20px;
+    background-color: aliceblue;
+    justify-content: space-between;
+    position: sticky;
+    top:0;
+    z-index: 3px;
+
+}
+
+.logo-image {
+    height: 45px;
+
+}
+.button{
+    margin: 5px 20px;
+}
+.navlinks {
+
+}

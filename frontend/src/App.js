@@ -1,4 +1,5 @@
 // Authentication
+import HomePage from './pages/HomePage';
 import Login from './pages/authentication/login';
 import UserReg from './pages/authentication/registerForm';
 
@@ -21,10 +22,13 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
+
+          <Route path='/' element={<HomePage/>}/>
+
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<UserReg/>}/>
 
-          <Route path='/' element={<Dashboard/>}/>
+          <Route path='/dashboard' element={<Dashboard/>}/>
           <Route path='/childview' element={<ChildView/>}/>
           <Route path='/fundview' element={<FundView/>}/>
           <Route path='/inquiryview' element={<InquiryView/>}/>
