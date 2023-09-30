@@ -17,7 +17,7 @@ class orphanageManagement{
             return error;
         }
     }
-    async updateOrphanage(Orphanage_ID,orphage_name,address,contact,capacity,employee_count,Email){
+    async updateOrphanage(Orphanage_ID,orphage_name,address,contact,capacity,employee_count,Email,user){
         try {
             await executeSQL(`INSERT INTO "Orphanage"("Orphanage_ID","orphage_name","address","contact","capacity","employee_count","Email","user")
                              VALUES (?,?,?,?,?,?,?)`,[Orphanage_ID,orphage_name,address,contact,capacity,employee_count,Email]);
@@ -25,7 +25,7 @@ class orphanageManagement{
             return error;
          }
         }
-    async receivefunding(Fund_ID,Orphan_ID,Document_ID,Amount){
+    async receivefunding(Fund_ID,Orphan_ID,Document_ID,Amount,user){
         try {
             await executeSQL(`INSERT INTO "Funding"("Fund_ID","Orphan_ID","Document_ID","Amount")
                              VALUES (?,?,?,?)`,[Fund_ID,Orphan_ID,Document_ID,Amount]);
