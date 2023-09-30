@@ -1,0 +1,13 @@
+.vertical-nav .nav-item {
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+.vertical-nav .nav-link {
+    color: inherit; /* Default color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s; /* Smooth transition for color changes */
+}
+
+.vertical-nav .nav-link:hover {
+    color: #007BFF; /* Color on hover, adjust as needed */
+}
