@@ -15,7 +15,6 @@ class Method{
     getPath(ind){
         return this.seperator[ind];
     }
-
     searchURL(query){
         return this.url.searchParams.get(query);
     }

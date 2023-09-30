@@ -2,6 +2,7 @@ const express = require('express');
 const http = require("http");
 const cors = require("cors");
 const dotenv = require('dotenv');
+const {extractUser} = require('./models/authentication.model')
 dotenv.config();
 
 
@@ -13,8 +14,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.use("/dashboard",dashboardControl);
-app.use("/auth",authControl);
+//app.use("/admin",dashboardControl);
+app.use("/",extractUser,authControl);   
 
 // app.listen(process.env.PORT);
 

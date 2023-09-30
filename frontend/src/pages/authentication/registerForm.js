@@ -6,18 +6,25 @@ import { addUser } from '../../api/authentication';
 export default function UserReg() {
   const userRegSchema = Yup.object().shape({
     name: Yup.string().required(),
+    username: Yup.string().required(),
     password: Yup.string().required(),
     age: Yup.string().required(),
-    field: Yup.string().required(),
+    address: Yup.string().required(),
+    contact: Yup.string().required(),
+    email: Yup.string().required(),
   });
 
   const handleSubmit = (values, { setSubmitting }) => {
     setSubmitting(true);
     const user = {
       name: values.name,
+      usernaem: values.username,
       password: values.password,
       age: values.age,
-      field: values.field,
+      address: values.address,
+      contact: values.contact,
+      email: values.email
+      
     };
     addUser({ user }).then(() => setSubmitting(false));
   };
@@ -32,9 +39,12 @@ export default function UserReg() {
               <Formik
                 initialValues={{
                   name: '',
+                  username: '',
                   password: '',
                   age: '',
-                  field: '',
+                  address: '',
+                  contact: '',
+                  email: ''
                 }}
                 validationSchema={userRegSchema}
                 onSubmit={handleSubmit}
@@ -51,6 +61,19 @@ export default function UserReg() {
                         />
                         <ErrorMessage
                           name="name"
+                          component="div"
+                          className="text-danger"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <Field
+                          type="text"
+                          name="username"
+                          placeholder="Username"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="username"
                           component="div"
                           className="text-danger"
                         />
@@ -84,12 +107,38 @@ export default function UserReg() {
                       <div className="mb-3">
                         <Field
                           type="text"
-                          name="field"
-                          placeholder="Field"
+                          name="address"
+                          placeholder="Address"
                           className="form-control"
                         />
                         <ErrorMessage
-                          name="field"
+                          name="address"
+                          component="div"
+                          className="text-danger"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <Field
+                          type="text"
+                          name="contact"
+                          placeholder="Contact"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="contact"
+                          component="div"
+                          className="text-danger"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <Field
+                          type="text"
+                          name="email"
+                          placeholder="Email"
+                          className="form-control"
+                        />
+                        <ErrorMessage
+                          name="email"
                           component="div"
                           className="text-danger"
                         />

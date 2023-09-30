@@ -206,4 +206,3 @@ CREATE TABLE "AllocatedFund"(
 	"Orphanage_ID" INT,
 	"Amount" INT
 );
-S
