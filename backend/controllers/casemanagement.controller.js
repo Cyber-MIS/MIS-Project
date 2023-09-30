@@ -14,7 +14,7 @@ class casemanagementcontrol {
 
     async assignInquiry(mehtod,user){
         try {
-            const {Inquiry_ID,Id} =method.getbody();
+            const {Inquiry_ID,ID} =method.getbody();
             await casemanagement.assignInquiry(Inquiry_ID,ID,user);
         } catch (error) {
             return error;

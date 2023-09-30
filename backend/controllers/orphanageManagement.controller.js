@@ -1,4 +1,4 @@
-const orphanageManagementModel = require("../models/orphanagemanagement.model")
+const orphanageManagementModel = require("../models/orphanageManagement.model")
 const orphanagemanagement= new orphanageManagementModel();
 
 class orphanagemanagementcontrol{
@@ -45,6 +45,7 @@ class orphanagemanagementcontrol{
             return error;
         }
     }
+
 }
 
 module.exports = orphanageManagementcontrol;

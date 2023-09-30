@@ -196,5 +196,14 @@ CREATE TABLE "Case" (
 
 CREATE INDEX "Key15" ON  "Case" ("Case_ID");
 
+CREATE TABLE "Assigned_Inquiries"(
+	"Inquiry_ID" INT,
+	"ID" INT
+);
 
-
+CREATE TABLE "AllocatedFund"(
+	"Fund_ID" INT,
+	"Orphanage_ID" INT,
+	"Amount" INT
+);
+S
