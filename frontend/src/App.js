@@ -12,6 +12,10 @@ import InquiryView from './pages/dashboard/InquiryView';
 import OrphanageView from './pages/dashboard/OrphanageView';
 import UserView from './pages/dashboard/UserView';
 import WorkerView from './pages/dashboard/WorkerView';
+import ChildRegistration from './pages/dashboard/ChildRegistration';
+import FundRegistration from './pages/dashboard/FundRegistration';
+import OrphanageRegistration from './pages/dashboard/OrphanageRegistration';
+import WorkerRegistration from './pages/dashboard/WorkerRegistation';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -25,6 +29,18 @@ function App() {
           <Route path='/' element={<HomePage />} />
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<UserReg />} />
+
+
+          // have to remove just testing
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/childregistration' element={<ChildRegistration />} />
+          <Route path='/fundregistration' element={<FundRegistration />} />
+          <Route path='/orphanageregistration' element={<OrphanageRegistration />} />
+          <Route path='/workerregistration' element={<WorkerRegistration />} />
+
+
+
+
           // All admin routes
           <Route
             path='/admin/*'
