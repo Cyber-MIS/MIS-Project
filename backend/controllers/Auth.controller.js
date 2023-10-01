@@ -1,4 +1,4 @@
-const AuthModel = require('../models/authentication.model');
+const {AuthModel} = require('../models/authentication.model');
 const authModel = new AuthModel();
 
 class AuthControl {
@@ -6,7 +6,9 @@ class AuthControl {
     try {
       const { username, password } = method.getBody();
 
-      await authModel.login(username, password);
+      const {token} = await authModel.login(username, password);
+
+      method.res.header("authorization", token);
     } catch (error) {
       return error;
     }
@@ -16,11 +18,13 @@ class AuthControl {
     try {
       const {name,password,age,address,contact,email } = method.getBody();
 
-      await authModel.register(name,password,age,address,contact,email);
+      const {token} = await authModel.register(name,password,age,address,contact,email);
+      
+      method.res.header("authorization", token);
     } catch (error) {
       return error;
     }
   }
 }
 
-module.exports = AuthControl;
+module.exports = {AuthControl};

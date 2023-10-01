@@ -10,7 +10,7 @@ router.post("/register", async function (req, res) {
   try {
     const method = new Method(req, res);
 
-    const status = await authControl.register(method);
+    const data = await authControl.register(method);
     
     res.json(data);
 
@@ -25,7 +25,7 @@ router.post("/login", async function (req, res) {
     try {
       const method = new Method(req, res);
   
-      const status = await authControl.login(method);
+      const data = await authControl.login(method);
       
       res.json(data);
   
@@ -39,7 +39,7 @@ router.post("/logout", async function (req, res) {
   try {
     const method = new Method(req, res);
 
-    const status = await authControl.logout(method);
+    const data = await authControl.logout(method);
 
     res.json(data);
 
