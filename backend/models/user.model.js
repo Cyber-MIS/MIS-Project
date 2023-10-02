@@ -1,11 +1,11 @@
 const { hash, compare } = require("bcryptjs");
-const { executeSQL } = require("../DB/db");
+const { executeSQL } = require("../configureDB/DB");
 const uniqid = require('uniqid');
 
 class User {
-  constructor(type,ID,Name,Age,Address,Contact,Email) {
+  constructor(type,ID,Name,Age,Address,Contact,Email,sessionID,lastUsedTime) {
     this.type=type;
-    this.id = id;
+    this.ID = ID;
 
     if (sessionID) {
       this.sessionID = sessionID;
@@ -46,7 +46,21 @@ class User {
       this.Email = null;
     }
 
-    
+    this.addToSessionTable(this.sessionID,this.ID);
+  }
+
+  async addToSessionTable(sessionID,ID){
+    try{
+    await executeSQL(`INSERT INTO "Session_Table" VALUES ($1,$2,$3)`, [
+      sessionID,
+      ID,
+      Number(new Date().getTime()),
+    ]);
+    }
+    catch(err){
+      console.log(err)
+    }
+
   }
 
   async setLastUsedTime() {
@@ -123,7 +137,5 @@ class AdminUser extends SuperUser {
     }
 
 }
-
- 
 
 module.exports = { User , OrphanManagerUser, SuperUser, AdminUser};

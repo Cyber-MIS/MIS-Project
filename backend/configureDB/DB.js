@@ -1,4 +1,6 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
+dotenv.config();
 
 const dbSettings = {
     user: process.env.DB_USER,
@@ -24,7 +26,7 @@ const executeSQL = async (sql, placeholders) => {
                     if (error){
                         rej({error});
                     }
-                    res(results.rows);
+                    res(results);
                 });
             });
         });

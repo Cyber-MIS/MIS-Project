@@ -3,7 +3,7 @@ const router = express.Router();
 const Method = require("../models/Method");
 const { AuthControl } = require("../controllers/Auth.controller");
 
-const authControl= new authControl();
+const authControl= new AuthControl();
 
 router.post("/register", async function (req, res) {
   

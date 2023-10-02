@@ -18,7 +18,7 @@ export default function UserReg() {
     setSubmitting(true);
     const user = {
       name: values.name,
-      usernaem: values.username,
+      username: values.username,
       password: values.password,
       age: values.age,
       address: values.address,

@@ -25,7 +25,7 @@ CREATE TABLE "All_User" (
   "Role_NO" INT,
   FOREIGN KEY ("Role_NO")
       REFERENCES "Role_map"("Role_NO")
-);
+);  
 
 CREATE INDEX "Key2" ON  "All_User" ("ID");
 
@@ -94,6 +94,14 @@ CREATE TABLE "User" (
 );
 
 CREATE INDEX "Key7" ON  "User" ("ID");
+
+CREATE TABLE "Session_Table" (
+  "Session_ID" VARCHAR(30) NOT NULL,
+  "ID" INT,
+  "last_used_time" BIGINT,
+  FOREIGN KEY ("ID")
+      REFERENCES "All_User"("ID")
+);
 
 CREATE TABLE "Child" (
   "Child_ID" SERIAL PRIMARY KEY,

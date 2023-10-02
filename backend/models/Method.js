@@ -8,7 +8,7 @@ class Method{
         this.req = req;
         this.res = res;
         this.type = req.method;
-        this.url = new URL("http://localhost"+":"+ process.env.port +req.url);
+        this.url = new URL("http://localhost"+":"+ process.env.PORT +req.url);
         this.seperator = req.url.split(/[/,?]/);
         this.user=null;
     }

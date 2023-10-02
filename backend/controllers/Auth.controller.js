@@ -7,7 +7,7 @@ class AuthControl {
       const { username, password } = method.getBody();
 
       const {token} = await authModel.login(username, password);
-
+      console.log(token)
       method.res.header("authorization", token);
     } catch (error) {
       return error;
@@ -16,10 +16,10 @@ class AuthControl {
 
   async register(method, user) {
     try {
-      const {name,password,age,address,contact,email } = method.getBody();
+      const {name,username,password,age,address,contact,email } = method.getBody().user;
 
-      const {token} = await authModel.register(name,password,age,address,contact,email);
-      
+      const {token} = await authModel.register(name,username,password,age,address,contact,email );
+      console.log(token)
       method.res.header("authorization", token);
     } catch (error) {
       return error;

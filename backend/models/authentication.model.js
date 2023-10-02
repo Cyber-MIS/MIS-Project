@@ -4,43 +4,48 @@ const {sign, verify} = require("jsonwebtoken");
 const Method = require("../models/Method");
 const { parse } = require('querystring');
 const ACCESS_TOKEN_SECRECT = "CyberProject";
+const {User} = require("./user.model")
 
-var Users = new Map();
+var Users = new Map();  
 
 
 class AuthModel{
 
-  async register(username,password,age,address,contact,email) {
+  async register(name,username,password,age,address,contact,email) {
+
+      console.log(name,username,password,age,address,contact,email )
   
       try {
       const data = await executeSQL(
-        `SELECT "Username" FROM "All_User" WHERE UserName = ?`,
+        `SELECT "Username" FROM "All_User" WHERE "Username" = $1`,
         [username]
       );
+
+      console.log(data)
 
       if (data[0]) {
         return "Error : Username already exists";
       } else {
         const hashedPassword = await hash(password, 10);
         await executeSQL(
-          `INSERT INTO "All_User" ("Username","Role_NO") VALUES (?,?,?) `,
+          `INSERT INTO "All_User" ("Username","Role_NO") VALUES ($1,$2) `,
           [username,"4"]
         );
-
-        const ID = await executeSQL(
-          `SELECT "ID" FROM "All_User" WHERE "Username" =?`,
-          [Email]
-        ); 
-
+        console.log("username added to all users")
+        const ID = (await executeSQL(
+          `SELECT "ID" FROM "All_User" WHERE "Username" = $1`,
+          [username]  
+        )).rows[0].ID; 
+        console.log(ID)
         await executeSQL(
-          `INSERT INTO "User" ("ID","Name","password","Age","Address","contact","Email") VALUES (?,?,?,?,?,?,?) `,
-          [ID,username,password,age,address,contact,email],
+          `INSERT INTO "User" ("ID","Name","Password","Age","Address","Contact","Email") VALUES ($1,$2,$3,$4,$5,$6,$7) `,
+          [ID,name,hashedPassword,age,address,contact,email],
         );
 
-        console.log(username + " successfuly added");
+        console.log(username + " successfuly added") ;
         
         //same as login code
-        return login(method);
+        return await this.login(username,password);
       }
     } catch (e) {
       console.log(e);
@@ -50,19 +55,25 @@ class AuthModel{
 
   async login(username,password) {
     try {
+
       const credential = await executeSQL(
-        `SELECT "ID", "Username", "password", "Name","Role_NO" FROM "User" JOIN "All_User" on "User.ID" = "All_User.ID" WHERE "All_User.Username" =?`,
+        `SELECT "User"."ID", "Username", "Password", "Name","Role_NO" FROM "User" JOIN "All_User" on "User"."ID" = "All_User"."ID" WHERE "All_User"."Username" = $1`,
         [username]
       );
-      if (!credential[0]) return "Error : Invalid Email or Password";
 
-      const status = await compare(password, credential[0].password);
+      // console.log(credential)
+
+      if (!credential.rows[0]) return "Error : Invalid Email or Password";
       
-      const {ID,Username,Name,Role_NO} = credential[0];
+      const status = await compare(password, credential.rows[0].Password);
+      
+      const {ID,Username,Name,Age,Address,Contact,Email,Role_NO} = credential.rows[0];
 
       if (status) {
         console.log("Password Matched");
-        var user = userFactory(ID, UserName, "User", Role_NO);
+        var user = userFactory("User",ID,Name,Age,Address,Contact,Email,null,null);
+
+        Users.set(ID,user)
       
         const token = getAccessToken({
           Role_NO: Role_NO,
@@ -70,8 +81,8 @@ class AuthModel{
           SessionID: user.sessionID // need to implement user
         });
 
-      console.log(UserName + " Successfully Logged In !!!");
-      
+      console.log(Username + " Successfully Logged In !!!");
+      // console.log(token,user)
       return { token: token, user: user };
       } else {
         console.log(e);
@@ -91,7 +102,7 @@ const getAccessToken = (data)=>{
 };
 
 
-function userFactory(type,id,Name,Age,Contact,Address,Email,Orphange_ID){
+function userFactory(type,id,Name,Age,Contact,Address,Email,Orphange_ID,sessionID,lastUsedTime){
   if (type=="Admin"){
     var user = new AdminUser(type,id);
   }
@@ -102,7 +113,7 @@ function userFactory(type,id,Name,Age,Contact,Address,Email,Orphange_ID){
     var user = new OrphanManagerUser(type,id,Name,Age,Address,Contact,Email,Orphange_ID);
   }
   else if (type=="User"){
-    var user = new User(type,id,Name,Age,Address,Contact,Email);
+    var user = new User(type,id,Name,Age,Address,Contact,Email,sessionID,lastUsedTime);
   }
   else{
     console.log("invalid user type");
@@ -111,12 +122,6 @@ function userFactory(type,id,Name,Age,Contact,Address,Email,Orphange_ID){
   return(user);
 }
 
-
-async function UpdateSession(Role_NO,ID,SessionID,user){
-  await user.setLastUsedTime();
-  const token = getAccessToken({Role_NO:user.Role_NO,ID:user.ID,SessionID:user.sessionID});
-  return token;
-}
 
 async function extractUser(req,res,next){
 
@@ -133,7 +138,7 @@ try {
     var user = Users.get(ID);
     req.user = user;
 
-    res.header("authorization", this.UpdateSession(Role_NO,ID,SessionID,user));
+    res.header("authorization", UpdateSession(Role_NO,ID,SessionID,user));
   }
   }
   next();
@@ -143,6 +148,12 @@ catch(err){
   console.log("Invaild token"); //when token expires
   next()
 }
+}
+
+async function UpdateSession(Role_NO,ID,SessionID,user){
+  await user.setLastUsedTime();
+  const token = getAccessToken({Role_NO:user.Role_NO,ID:user.ID,SessionID:user.sessionID});
+  return token;
 }
 
 

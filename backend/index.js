@@ -19,7 +19,7 @@ app.use("/",extractUser,authControl);
 
 // app.listen(process.env.PORT);
 
-app.listen(4000);
+app.listen(process.env.PORT);
 
 /* const {executeSQL} = require('./configureDB/DB');
 const out =async () => {
