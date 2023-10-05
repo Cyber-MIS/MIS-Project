@@ -5,7 +5,6 @@ import Header from '../Components/header';
 import Footer from '../Components/footer';
 import Sidebar from '../Components/sidebar';
 import './PageStyling/HomePage.css';
-import Navbar from '../Components/navbar';
 
 export default function HomePage() {
 
@@ -27,9 +26,9 @@ export default function HomePage() {
 
     return (
         <div className="HomePage">
-            <Navbar />
+            <Header />
             <div style={containerStyle}>
-
+                
                 <div className='navlinks'>
                     <Button className='button' type="primary" onClick={() => navigate('/login')}>Login</Button>
                     <Button className='button' type="primary" onClick={() => navigate('/register')}>Register</Button>
