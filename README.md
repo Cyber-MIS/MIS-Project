@@ -45,3 +45,10 @@ The PostgreSQL database serves as the backbone of the Orphanage and Child Manage
 2. **Data Integrity:** Data integrity constraints, such as foreign keys, indexes, and unique constraints, are enforced to maintain data accuracy and consistency.
 
 3. **Query Optimization:** SQL queries are optimized to ensure fast and efficient data retrieval and manipulation.
+
+### Contributors
+1. Charindu Thisara
+2. M. Muaad
+3. Vishvadini Ravihari
+4. Nusal Muthuthanthrige
+5. Udara Wijesinghe
