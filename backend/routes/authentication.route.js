@@ -11,6 +11,8 @@ router.post("/register", async function (req, res) {
     const method = new Method(req, res);
 
     const data = await authControl.register(method);
+    console.log(res)
+
     
     res.json(data);
 
