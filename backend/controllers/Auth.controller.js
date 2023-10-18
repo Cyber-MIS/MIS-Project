@@ -14,6 +14,7 @@ class AuthControl {
     }
   }
 
+  
   async register(method) {
     try {
       const {name,username,password,age,address,contact,email } = method.getBody().user;
