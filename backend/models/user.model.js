@@ -1,6 +1,7 @@
 const { hash, compare } = require("bcryptjs");
 const { executeSQL } = require("../configureDB/DB");
 const uniqid = require('uniqid');
+const e = require("express");
 
 class User {
   constructor(type,ID,Name,Age,Address,Contact,Email,sessionID,lastUsedTime) {
@@ -61,6 +62,15 @@ class User {
       console.log(err)
     }
 
+  }
+
+  async logout(){
+    try{
+      await executeSQL(`DELETE FROM "Session_Table" WHERE "ID" = $1`,this.ID)
+    }
+    catch(err){
+      console.log(err)
+    }
   }
 
   async setLastUsedTime() {

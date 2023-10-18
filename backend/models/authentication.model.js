@@ -22,7 +22,7 @@ class AuthModel{
       );
 
       console.log(data)
-
+      
       if (data[0]) {
         return "Error : Username already exists";
       } else {
@@ -91,6 +91,16 @@ class AuthModel{
     } catch (e) {
       console.log(e);
       return "Error";
+    }
+  }
+
+  async logout(user){
+    try{
+      user.logout();
+      Users.remove(user.ID)
+    }
+    catch(err){
+      console.log(err)
     }
   }
 

@@ -45,6 +45,8 @@ export async function logout() {
 export async function addUser(newUSer) {
     try {
         const response = await axios.post(`${HOST}/register`, newUSer);
+        console.log(response.data);
+        console.log(response.headers.get('authorization'));
         return response.data;
     }
     catch (err) {
